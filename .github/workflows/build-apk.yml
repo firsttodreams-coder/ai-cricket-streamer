@@ -24,6 +24,13 @@ jobs:
           fi
           echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
 
+      - name: Apply bilingual Urdu and English interface
+        run: |
+          mkdir -p "$PROJECT_DIR/app/src/main/assets"
+          cp app-overlay/index.html "$PROJECT_DIR/app/src/main/assets/index.html"
+          cp app-overlay/app.js "$PROJECT_DIR/app/src/main/assets/app.js"
+          cat app-overlay/style.css >> "$PROJECT_DIR/app/src/main/assets/style.css"
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
