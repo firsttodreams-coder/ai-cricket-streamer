@@ -14,22 +14,32 @@ jobs:
       - name: Download project
         uses: actions/checkout@v4
 
-      - name: Extract ZIP
+      - name: Extract project source
         run: |
           unzip -q ai-cricket-streamer-android-v2-source.zip -d extracted
           PROJECT_DIR=$(dirname "$(find extracted -name settings.gradle.kts -print -quit)")
-          if [ -z "$PROJECT_DIR" ]; then
-            echo "Android project not found"
-            exit 1
-          fi
+          if [ -z "$PROJECT_DIR" ]; then echo "Android project not found"; exit 1; fi
           echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
 
-      - name: Apply bilingual Urdu and English interface
+      - name: Install bilingual interface and RTMP scoreboard engine
         run: |
-          mkdir -p "$PROJECT_DIR/app/src/main/assets"
-          cp app-overlay/index.html "$PROJECT_DIR/app/src/main/assets/index.html"
-          cp app-overlay/app.js "$PROJECT_DIR/app/src/main/assets/app.js"
-          cat app-overlay/style.css >> "$PROJECT_DIR/app/src/main/assets/style.css"
+          ASSET_DIR="$PROJECT_DIR/app/src/main/assets"
+          JAVA_DIR="$PROJECT_DIR/app/src/main/java/com/aicricketstreamer/mobile"
+          mkdir -p "$ASSET_DIR" "$JAVA_DIR"
+          cp app-overlay/index.html "$ASSET_DIR/index.html"
+          cp app-overlay/app.js "$ASSET_DIR/app.js"
+          cat app-overlay/style.css >> "$ASSET_DIR/style.css"
+          cp app-overlay/java/com/aicricketstreamer/mobile/MainActivity.kt "$JAVA_DIR/MainActivity.kt"
+          cp app-overlay/java/com/aicricketstreamer/mobile/ScoreboardActivity.kt "$JAVA_DIR/ScoreboardActivity.kt"
+          cp app-overlay/java/com/aicricketstreamer/mobile/ScoreboardBitmapSource.kt "$JAVA_DIR/ScoreboardBitmapSource.kt"
+          sed -i 's#repositories { google(); mavenCentral() }#repositories { google(); mavenCentral(); maven { url = uri("https://jitpack.io") } }#' "$PROJECT_DIR/settings.gradle.kts"
+          cat >> "$PROJECT_DIR/app/build.gradle.kts" <<'EOF'
+
+          dependencies {
+              implementation("com.github.pedroSG94.RootEncoder:library:2.8.1")
+          }
+          EOF
+          sed -i 's#</application>#        <activity android:name=".ScoreboardActivity" android:exported="false" />\n    </application>#' "$PROJECT_DIR/app/src/main/AndroidManifest.xml"
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -66,7 +76,7 @@ jobs:
           path: /tmp/android-source-inspection.zip
 
       - name: Build APK
-        run: gradle -p "$PROJECT_DIR" assembleDebug
+        run: gradle -p "$PROJECT_DIR" assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
