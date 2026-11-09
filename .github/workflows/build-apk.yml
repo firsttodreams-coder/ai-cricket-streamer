@@ -11,8 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Download project
         uses: actions/checkout@v4
+
+      - name: Extract ZIP
+        run: |
+          unzip -q ai-cricket-streamer-android-v2-source.zip -d extracted
+          PROJECT_DIR=$(dirname "$(find extracted -name settings.gradle.kts -print -quit)")
+          if [ -z "$PROJECT_DIR" ]; then
+            echo "Android project not found"
+            exit 1
+          fi
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -20,17 +30,16 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Build APK
-        uses: gradle/gradle-build-action@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
-          arguments: assembleDebug
+
+      - name: Build APK
+        run: gradle -p "$PROJECT_DIR" assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: ai-cricket-streamer-apk
-          path: app/build/outputs/apk/debug/*.apk
+          path: extracted/**/app/build/outputs/apk/debug/*.apk
