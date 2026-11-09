@@ -1,40 +1,21 @@
 <!doctype html>
 <html lang="ur" dir="rtl">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071b18"><meta name="description" content="AI Cricket Streamer mobile control panel">
-<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css">
-<title>AI Cricket Streamer</title>
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071b18"><title>AI Cricket Streamer</title><link rel="stylesheet" href="style.css"></head>
 <body>
-<header><div class="brand"><div class="ball">🏏</div><div><b>AI Cricket Streamer</b><small data-i18n="subtitle">موبائل کنٹرول پینل · ورژن 1</small></div></div><div class="language-switch" aria-label="Language"><button type="button" id="langUr" class="lang-active">اردو</button><button type="button" id="langEn">English</button></div></header>
+<header><div class="brand"><div class="ball">🏏</div><div><b>AI Cricket Streamer</b><small data-i18n="subtitle">موبائل کنٹرول پینل</small></div></div><div class="language-switch"><button type="button" id="langUr" class="lang-active">اردو</button><button type="button" id="langEn">English</button></div></header>
 <main>
-<section class="hero"><div class="eyebrow">CRICKET BROADCAST STUDIO</div><h1 data-i18n="heroTitle">آپ کا میچ، آپ کی لائیو نشریات</h1><p data-i18n="heroText">اسکور بورڈ کا لنک محفوظ کریں، میچ کا صفحہ کھولیں اور اپنی براڈکاسٹ سیٹنگز سنبھالیں۔</p></section>
-<section class="panel">
-<div class="section-title"><span>1</span><div><h2 data-i18n="scoreTitle">اسکور بورڈ کا لنک</h2><p data-i18n="scoreSub">آپ کا دیا ہوا لنک پہلے سے شامل ہے</p></div></div>
-<label for="scoreUrl" data-i18n="scoreLabel">CricketLiveNow URL</label>
-<input id="scoreUrl" type="url" dir="ltr" value="https://cricketlivenow.com/match/13LT?layout=layout1&source=layout1-only&f=1&sf=2BD&time=1794198600000">
-<div class="actions"><button class="primary" id="openScore" data-i18n="openScore">اسکور بورڈ کھولیں ↗</button><button class="secondary" id="saveUrl" data-i18n="saveUrl">لنک محفوظ کریں</button></div>
-<div class="notice" data-i18n="embedNotice">اگر ویب سائٹ iframe کی اجازت نہ دے تو اسکور بورڈ الگ ٹیب میں کھلے گا۔ اس کا مطلب یہ نہیں کہ ویڈیو خودکار طور پر نشر ہو رہی ہے۔</div>
-</section>
-<section class="panel">
-<div class="section-title"><span>2</span><div><h2 data-i18n="destTitle">اسٹریمنگ کے چینلز</h2><p data-i18n="destSub">اپنے چینلز کی تفصیلات درج کریں</p></div></div>
-<label data-i18n="ytLabel">YouTube Stream Key</label><div class="secret"><input id="ytKey" type="password" data-i18n-placeholder="ytPlaceholder" placeholder="YouTube سے Stream Key درج کریں" dir="ltr"><button type="button" data-toggle="ytKey" data-i18n="show">دکھائیں</button></div>
-<label data-i18n="fbLabel">Facebook Stream Key</label><div class="secret"><input id="fbKey" type="password" data-i18n-placeholder="fbPlaceholder" placeholder="Facebook سے Stream Key درج کریں" dir="ltr"><button type="button" data-toggle="fbKey" data-i18n="show">دکھائیں</button></div>
-<div class="notice warning" data-i18n="keyNotice">Stream Keys پاس ورڈ کی طرح خفیہ رکھیں۔ یہ صرف اسی موبائل کے browser storage میں محفوظ ہوں گی؛ کسی کو نہ بھیجیں۔</div>
-<button class="primary full" id="saveKeys" data-i18n="saveSettings">سیٹنگز محفوظ کریں</button>
-</section>
-<section class="panel">
-<div class="section-title"><span>3</span><div><h2 data-i18n="liveTitle">لائیو نشریات</h2><p data-i18n="liveSub">براہِ راست نشریات کی تیاری</p></div></div>
-<div class="status"><i></i><div><b data-i18n="engineStatus">اسٹریمنگ انجن منسلک نہیں</b><small data-i18n="engineDetail">یہ کنٹرول پینل ہے؛ RTMP relay/server درکار ہے۔</small></div></div>
-<button class="disabled full" disabled data-i18n="startLive">● YouTube + Facebook لائیو شروع کریں</button>
-<p class="small" data-i18n="liveNotice">Start بٹن ابھی بند ہے کیونکہ اس پیکج میں RTMP ویڈیو انجن یا کلاؤڈ سرور شامل نہیں۔ صرف Stream Keys درج کرنے سے لائیو شروع نہیں ہوتی۔</p>
-</section>
-<section class="panel">
-<h2 data-i18n="installTitle">موبائل پر انسٹال کریں</h2>
-<ol><li data-i18n="install1">اس PWA کو HTTPS ویب ہوسٹنگ پر اپ لوڈ کریں۔</li><li data-i18n="install2">Android Chrome میں ویب سائٹ کھولیں۔</li><li data-i18n="install3">⋮ مینو سے Add to Home screen یا Install app منتخب کریں۔</li></ol>
-</section>
-<footer data-i18n="footer">AI Cricket Streamer · موبائل PWA پروٹوٹائپ<br>مفت اوپن ویب ٹیکنالوجی پر مبنی</footer>
-</main>
-<div id="toast" role="status"></div><script src="app.js"></script>
-</body></html>
+<section class="hero"><div class="eyebrow">CRICKET BROADCAST STUDIO</div><h1 data-i18n="heroTitle">آپ کا میچ، آپ کی لائیو نشریات</h1><p data-i18n="heroText">اسکور بورڈ کو ویڈیو بنا کر RTMP سرور پر نشر کریں۔</p></section>
+<section class="panel"><div class="section-title"><span>1</span><div><h2 data-i18n="scoreTitle">اسکور بورڈ کا لنک</h2><p data-i18n="scoreSub">CricketLiveNow میچ کا لنک</p></div></div>
+<label for="scoreUrl" data-i18n="scoreLabel">CricketLiveNow URL</label><input id="scoreUrl" type="url" dir="ltr" value="https://cricketlivenow.com/match/13LT?layout=layout1&source=layout1-only&f=1&sf=2BD&time=1794198600000">
+<div class="actions"><button class="secondary" id="openScore" data-i18n="openScore">اسکور بورڈ الگ کھولیں ↗</button><button class="secondary" id="saveUrl" data-i18n="saveUrl">لنک محفوظ کریں</button></div>
+<div class="notice" data-i18n="captureNotice">لائیو ویڈیو صرف اسکور بورڈ سے بنے گی، موبائل کیمرے سے نہیں۔ میچ کا صفحہ اس ایپ کے اندر کھلے گا۔</div></section>
+<section class="panel"><div class="section-title"><span>2</span><div><h2 data-i18n="rtmpTitle">RTMP منزل</h2><p data-i18n="rtmpSub">RTMP سرور کا پتہ اور Stream Key درج کریں</p></div></div>
+<label for="rtmpServer" data-i18n="serverLabel">RTMP Server URL</label><input id="rtmpServer" type="url" dir="ltr" placeholder="rtmps://example.com/live">
+<label for="rtmpKey" data-i18n="rtmpKeyLabel">RTMP Stream Key</label><div class="secret"><input id="rtmpKey" type="password" dir="ltr" placeholder="Stream Key"><button type="button" data-toggle="rtmpKey" data-i18n="show">دکھائیں</button></div>
+<div class="notice warning" data-i18n="keyNotice">Stream Key پاس ورڈ کی طرح خفیہ رکھیں۔ یہ صرف اسی موبائل میں محفوظ ہوگی؛ کسی کو نہ بھیجیں۔</div><button class="primary full" id="saveSettings" data-i18n="saveSettings">سیٹنگز محفوظ کریں</button></section>
+<section class="panel"><div class="section-title"><span>3</span><div><h2 data-i18n="liveTitle">اسکور بورڈ لائیو</h2><p data-i18n="liveSub">اسکور بورڈ کو ویڈیو بنا کر نشر کریں</p></div></div>
+<div class="status"><i></i><div><b data-i18n="engineReady">موبائل ویڈیو انجن شامل ہے</b><small data-i18n="engineDetail">H.264 ویڈیو انکوڈنگ اور RTMP کنکشن</small></div></div>
+<button class="primary full" id="startStream" data-i18n="startStream">اسکور بورڈ لائیو شروع کریں</button>
+<p class="small" data-i18n="liveNotice">اس بٹن سے الگ اسکرین کھلے گی۔ وہاں Start دبانے پر Android اجازت اور RTMP کنکشن درکار ہوگا۔ ابھی relay ترتیب نہیں دیا گیا؛ ایک RTMP منزل استعمال ہوگی۔</p></section>
+<section class="panel"><h2 data-i18n="installTitle">اہم ہدایات</h2><ol><li data-i18n="tip1">RTMP سرور URL اور Stream Key حاصل کریں۔</li><li data-i18n="tip2">اسکور بورڈ URL اور RTMP تفصیلات محفوظ کریں۔</li><li data-i18n="tip3">لائیو شروع کریں؛ انٹرنیٹ اپ لوڈ اسپیڈ مناسب ہونی چاہیے۔</li></ol></section>
+<footer data-i18n="footer">AI Cricket Streamer · Scoreboard video prototype</footer></main><div id="toast" role="status"></div><script src="app.js"></script></body></html>
