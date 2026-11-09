@@ -49,14 +49,14 @@ jobs:
 
       - name: Package extracted source for inspection
         run: |
-          cd "$PROJECT_DIR/.."
-          zip -qr "$GITHUB_WORKSPACE/android-source-inspection.zip" "$(basename "$PROJECT_DIR")"
+          cd "$GITHUB_WORKSPACE"
+          zip -qr /tmp/android-source-inspection.zip extracted
 
       - name: Upload source inspection artifact
         uses: actions/upload-artifact@v4
         with:
           name: android-source-inspection
-          path: android-source-inspection.zip
+          path: /tmp/android-source-inspection.zip
 
       - name: Build APK
         run: gradle -p "$PROJECT_DIR" assembleDebug
