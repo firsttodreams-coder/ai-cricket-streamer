@@ -1,0 +1,15 @@
+
+.language-switch{display:flex;gap:5px;flex-shrink:0;background:#102d23;padding:4px;border-radius:12px}
+.language-switch button{padding:7px 10px;font-size:11px;background:transparent;color:#b9d2c7;border:1px solid transparent}
+.language-switch button.lang-active{background:#35c77e;color:#062015}
+html[dir="ltr"] body{direction:ltr}
+html[dir="ltr"] header{direction:ltr}
+html[dir="ltr"] .eyebrow{text-align:left}
+html[dir="ltr"] .notice{border-right:0;border-left:3px solid #42c989}
+html[dir="ltr"] .warning{border-left-color:#e4b64b}
+html[dir="ltr"] ol{padding-right:0;padding-left:21px}
+html[dir="ltr"] .section-title{direction:ltr}
+html[dir="ltr"] label{text-align:left}
+html[dir="ltr"] .hero{text-align:left}
+html[dir="ltr"] footer{white-space:pre-line}
+html[dir="rtl"] footer{white-space:pre-line}
