@@ -35,6 +35,18 @@ jobs:
         with:
           gradle-version: '8.7'
 
+      - name: Fix Java Kotlin compatibility
+        run: |
+          cat >> "$PROJECT_DIR/app/build.gradle.kts" <<'EOF'
+
+          android {
+              compileOptions {
+                  sourceCompatibility = JavaVersion.VERSION_17
+                  targetCompatibility = JavaVersion.VERSION_17
+              }
+          }
+          EOF
+
       - name: Build APK
         run: gradle -p "$PROJECT_DIR" assembleDebug
 
